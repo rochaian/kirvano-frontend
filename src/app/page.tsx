@@ -1,7 +1,12 @@
+'use client'
+
 import Button from "@/components/atoms/Button";
 import Label from "@/components/atoms/Label";
+import MyForm from "@/components/molecules/MyForm";
 
 export default function Home() {
+ 
+
   return (
     
     <main className="flex min-h-screen bg-white flex-col items-center justify-between p-24">
@@ -14,6 +19,8 @@ export default function Home() {
     <Label text="Use saved address" variant="secondary" />
     <Label text="First line of address" variant="tertiary" />
     <Label text="123 , Electric avenue" variant="quaternary" />
+
+    <MyForm></MyForm>
     
     </main>
   );
