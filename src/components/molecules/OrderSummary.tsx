@@ -27,7 +27,7 @@ export default function OrderSummary() {
       </div>
 
       <Label text="£320.45" variant="bold" />
-      <br></br>
+      
 
       <GiftCard/>
 

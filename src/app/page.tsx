@@ -26,6 +26,7 @@ export default function Home() {
          
 
           <div className="col-span-3 bg-[#f6fafd] p-10 rounded-lg	">
+            
             <OrderSummary/>
               
           </div>
