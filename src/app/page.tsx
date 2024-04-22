@@ -18,9 +18,12 @@ export default function Home() {
 
       <div className="bg-white min-h-screen p-20">
 
-        <div className="grid grid-flow-row-dense grid-cols-7  gap-4 ">
+        <div className="grid grid-flow-row-dense grid-cols-7  gap-8 ">
          
          <div className="col-span-4 bg-[#f6fafd] px-20 py-10 rounded-lg">
+
+            <Label text="Shipping" variant="blue"/>
+
             <Label text="Payment Details" variant="primary" />
           </div>
          
