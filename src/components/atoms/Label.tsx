@@ -22,12 +22,11 @@ const Label: React.FC<LabelProps> = ({ text, variant }) => {
     'text-[20px] font-bold leading-[24.2px] text-black': variant === 'bold', // Negrito
 
 
-    'text-[20px] font-medium leading-[24.2px] text-[#2D3748]': variant === 'price', // Negrito
+    'text-[20px] font-medium leading-[24.2px] text-[#2D3748]': variant === 'price', // Preço
 
-    'text-[20px] font-medium leading-[24.2px] text-[#38B2AC]': variant === 'green', // Negrito
+    'text-[20px] font-medium leading-[24.2px] text-[#38B2AC]': variant === 'green', // Verde
 
-    // 'text-[18px] font-normal leading-[21.78px] text-black': variant === 'green' // Negrito
-    'text-[20px] font-medium leading-[24.2px]] text-[#3182CE]': variant === 'blue' // Negrito
+    'text-[20px] font-medium leading-[24.2px]] text-[#3182CE]': variant === 'blue' // Azul
   });
 
   return <span className={labelClass}>{text}</span>;
