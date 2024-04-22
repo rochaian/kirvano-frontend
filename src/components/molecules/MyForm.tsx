@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import InputText from "../atoms/InputText";
 import { FormValues } from "@/app/types/FormValues";
+import Label from "../atoms/Label";
 
 
 export default function MyForm() {
@@ -18,25 +19,33 @@ export default function MyForm() {
   const onSubmit = (data: FormValues) => console.log(data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <InputText
-        control={control}
-        name="cardName"
-        rules={{ required: "Name on card is required" }}
-      />
-      <InputText
-        control={control}
-        name="cardNumber"
-        rules={{ required: "Card number is required" }}
-      />
-      <InputText
-        control={control}
-        name="cvc"
-        rules={{ required: "CVC is required" }}
-      />
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-        Submit
-      </button>
-    </form>
+  
+  
+        <form className="bg-white" onSubmit={handleSubmit(onSubmit)}>
+            <Label text="Card Name" variant="tertiary"></Label>
+            <InputText
+                control={control}
+                name="cardName"
+                
+                rules={{ required: "Name on card is required" }}
+            />
+
+            <Label text="Card Number" variant="secondary"></Label>
+            <InputText
+                control={control}
+                name="cardNumber"
+                rules={{ required: "Card number is required" }}
+            />
+
+            <Label text="CVC" variant="secondary"></Label>    
+            <InputText
+                control={control}
+                name="cvc"
+                rules={{ required: "CVC is required" }}
+            />
+            <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+                Submit
+            </button>
+        </form>
   );
 }
