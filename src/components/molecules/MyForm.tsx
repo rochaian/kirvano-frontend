@@ -1,51 +1,69 @@
-'use client'
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import InputTextForm from '../atoms/InputTextForm'; // Componente InputText
 
-import { useForm } from "react-hook-form";
-import InputText from "../atoms/InputText";
-import { FormValues } from "@/app/types/FormValues";
-import Label from "../atoms/Label";
+// Esquema Zod para validação do formulário
+const formSchema = z.object({
+  name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
+  phone: z.string().regex(/^\d{10,11}$/, 'Número de telefone deve ter 10 ou 11 dígitos'),
+});
 
+type FormSchema = z.infer<typeof formSchema>;
 
-export default function MyForm() {
-  const { handleSubmit, control } = useForm<FormValues>({
-    defaultValues: {
-      cardName: "",
-      cardNumber: "",
-      cvc: "",
-    },
-    mode: "onChange",
+const MyForm = () => {
+  const { control, handleSubmit, formState } = useForm<FormSchema>({
+    resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: FormValues) => console.log(data);
+  const onSubmit = (data: FormSchema) => {
+    console.log(data); // Dados do formulário
+  };
 
   return (
-  
-  
-        <form className="bg-white" onSubmit={handleSubmit(onSubmit)}>
-            <Label text="Card Name" variant="tertiary"></Label>
-            <InputText
-                control={control}
-                name="cardName"
-                
-                rules={{ required: "Name on card is required" }}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-4">
+        {/* <Controller
+          name="name"
+          control={control}
+          render={({ field, fieldState }) => (
+            <InputTextForm
+              {...field}
+              placeholder="Digite seu nome"
+              isValid={!fieldState.invalid}
             />
+          )}
+        /> */}
+        {formState.errors.name && (
+          <span className="text-red-500 text-sm">{formState.errors.name.message}</span>
+        )}
+      </div>
 
-            <Label text="Card Number" variant="secondary"></Label>
-            <InputText
-                control={control}
-                name="cardNumber"
-                rules={{ required: "Card number is required" }}
+      <div className="mb-4">
+        {/* <Controller
+          name="phone"
+          control={control}
+          render={({ field, fieldState }) => (
+            <InputTextForm
+              {...field}
+              placeholder="Digite seu telefone"
+              isValid={!fieldState.invalid}
             />
+          )}
+        /> */}
+        {formState.errors.phone && (
+          <span className="text-red-500 text-sm">{formState.errors.phone.message}</span>
+        )}
+      </div>
 
-            <Label text="CVC" variant="secondary"></Label>    
-            <InputText
-                control={control}
-                name="cvc"
-                rules={{ required: "CVC is required" }}
-            />
-            <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                Submit
-            </button>
-        </form>
+      <button
+        type="submit"
+        className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+      >
+        Enviar
+      </button>
+    </form>
   );
-}
+};
+
+export default MyForm;

@@ -5,7 +5,7 @@ import LineSvg from '../../../public/line.svg';
 import CheckSvg from '../../../public/check.svg';
 import ExpirationSvg from '../../../public/expiration-line.svg';
 import CustomSelect from "@/components/atoms/CustomSelect";
-import ValidatedInput from "@/components/atoms/ValidateInput";
+import ValidatedInput from "@/components/atoms/ValidatedInput";
 
 export default function ShippingPaymentForm() {
 
