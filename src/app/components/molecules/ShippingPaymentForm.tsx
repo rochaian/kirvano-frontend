@@ -10,10 +10,10 @@ import CustomSelect from "@/app/components/atoms/CustomSelect";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import ValidatedInputText from "../atoms/ValidatedInputText";
-
-
 import { PaymentFormSchema, paymentFormSchema } from "@/app/types/PaymentFormSchema";
 import InputTextForm from "../atoms/InputTextForm";
+
+import { sendPaymentData } from "@/app/services/apiService";
 
 
 
@@ -24,56 +24,13 @@ export default function ShippingPaymentForm() {
         mode: 'onChange'
     });
 
-    // Define uma interface para a resposta da API
-    interface ApiResponse {
-        success: boolean;
-        message: string;
-    }
-
-    const sendFormData = async (data: PaymentFormSchema): Promise<ApiResponse> => {
-        try {
-            const response = await fetch('https://kirvano-backend.onrender.com/api/payments?access_token=ABCDE12345', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-
-            // Verifica se a resposta está ok ou não
-            if (!response.ok) {
-                // Verifica se o status é 400 para fornecer uma mensagem mais clara
-                if (response.status === 400) {
-                    const errorData = await response.json(); // Tenta obter mais detalhes do erro
-
-                    alert(errorData.message);
-
-                    return {
-                        success: false,
-                        message: errorData.message || 'Erro no formulário. Verifique os campos.',
-                    };
-                }
-                // Lança um erro genérico para outros códigos de status
-                throw new Error('Erro ao enviar o formulário');
-            }
-
-            // Se a resposta for bem-sucedida
-            const json = await response.json();
-            alert(json.message);
-
-            return { success: true, message: json.message || 'Formulário enviado com sucesso!' };
-        } catch (error: any) {
-            // Se houve uma exceção, retorna uma mensagem de erro
-            return { success: false, message: error.message || 'Erro desconhecido ao enviar o formulário' };
-        }
-    };
-
-
     // Função para proceder o pagamento
     async function handleSubmitForm(data: PaymentFormSchema) {
         console.log("Payment Order");
-        console.log(data);
-        sendFormData(data);
+        const result = await sendPaymentData(data);
+        console.log('result', result);
+        
+        alert(result.message);
     }
 
     function validateSimple(value: string): boolean {
