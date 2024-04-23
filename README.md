@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Kirvano Checkout - FrontEnd
+## Projeto de Simulação de Pagamento - Validação de Cartões de Crédito
 
-## Getting Started
+Este repositório contém um projeto que simula um processo de pagamento ao enviar informações de cartão de crédito para uma API de validação. A aplicação valida se os dados do cartão inseridos pelo usuário estão corretos e se passam por uma série de verificações, incluindo a validação pelo algoritmo de Luhn.
 
-First, run the development server:
+## Recursos do Projeto
+- Simulação de processo de pagamento com validação em tempo real
+- Verificação de informações do cartão, como número, data de validade e código de segurança
+- Uso do algoritmo de Luhn para validação de números de cartões
+- Interface amigável para simular pagamentos e validar dados de cartão
+
+## Como Funciona
+O projeto permite ao usuário inserir informações do cartão de crédito e enviar para uma API simulada que verifica a validade dos dados. A API responde indicando se o cartão é válido, retornando mensagens de erro quando aplicável.
+
+## Instalação e Configuração
+Para instalar e configurar este projeto, siga as instruções abaixo.
+
+### Pré-requisitos
+- Node.js 18 ou superior
+- Gerenciador de pacotes como `npm` ou `yarn`
+
+### Passo 1: Clone o Repositório
+Clone o repositório para sua máquina local:
+
+```bash
+git clone https://github.com/seu-usuario/projeto-simulacao-pagamento.git
+```
+
+### Passo 2: Instale as Dependências
+Navegue até a pasta do projeto e instale as dependências:
+
+```bash
+cd projeto-simulacao-pagamento
+npm install
+# ou
+yarn install
+```
+
+### Passo 3: Inicie a Aplicação
+Após instalar as dependências, inicie a aplicação para testar a simulação de pagamento:
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Passo 4: Simule um Pagamento
+Com a aplicação em execução, use a interface para inserir informações de cartão de crédito e simular um pagamento. A API responderá com uma validação dos dados inseridos.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Para testar o projeto de simulação de pagamento, acesse o link na Vercel: [https://kirvano-frontend.vercel.app/](kirvano-frontend). 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Contribuição
+Contribuições para aprimorar o projeto são bem-vindas. Para contribuir, crie um fork, faça suas alterações e envie um pull request.
 
-## Learn More
+## Licença
+Este projeto está sob a [licença MIT](LICENSE).
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contato
+Para perguntas ou sugestões, entre em contato com o desenvolvedor ou abra uma issue no GitHub.
