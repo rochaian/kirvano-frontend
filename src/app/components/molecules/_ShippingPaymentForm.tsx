@@ -33,7 +33,7 @@ export default function ShippingPaymentForm() {
         <div>
             <div className="flex flex-row items-center text-center justify-center gap-2">
                 <span
-                    className="text-[#3182CE] text-[20px] font-medium cursor-pointer"
+                    className="text-b600 text-[20px] font-medium cursor-pointer"
                     onClick={onChangeView}
                 >
                     Shipping
@@ -123,7 +123,7 @@ export default function ShippingPaymentForm() {
         <div>
             <div className="flex flex-row items-center text-center justify-center gap-2">
                 <span
-                    className="text-[#3182CE] text-[20px] font-medium"
+                    className="text-b600 text-[20px] font-medium"
                     onClick={onChangeView}
                 >
                     Shipping
@@ -131,7 +131,7 @@ export default function ShippingPaymentForm() {
                 <LineSvg />
                 <CheckSvg />
                 <LineSvg />
-                <span className="text-[#3182CE] text-[20px] font-medium">Payment</span>
+                <span className="text-b600 text-[20px] font-medium">Payment</span>
             </div>
 
             <br />

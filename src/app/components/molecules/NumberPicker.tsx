@@ -36,7 +36,7 @@ const NumberPicker: React.FC<NumberPickerProps> = ({ initialValue = 1, min = 0, 
     <div className="flex items-center">
       
       <button 
-        className="flex items-center justify-center w-10 h-10  bg-[#E2E8F0] text-black rounded-md" 
+        className="flex items-center justify-center w-10 h-10  bg-c300 text-black rounded-md" 
         onClick={decrement}
       >
         <DecrementIcon/>
@@ -48,7 +48,7 @@ const NumberPicker: React.FC<NumberPickerProps> = ({ initialValue = 1, min = 0, 
         className="flex text-center w-10 bg-[#f6fafd]"
       />
       <button 
-        className="flex items-center justify-center  w-10 h-10 bg-[#E2E8F0] text-black rounded-md" 
+        className="flex items-center justify-center  w-10 h-10 bg-c300 text-black rounded-md" 
         onClick={increment}
       >
         <IncrementIcon/>

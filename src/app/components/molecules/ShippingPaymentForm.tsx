@@ -19,6 +19,13 @@ import { sendPaymentData } from "@/app/services/apiService";
 
 export default function ShippingPaymentForm() {
 
+    //Utilizado para alterar as telas do formulário
+    const [isShippingForm, setIsShippingForm] = useState(true);
+    const toggleView = () => {
+        setIsShippingForm(!isShippingForm);
+    };
+
+    //Utilizado para registrar e integrar o react-hook-form com o zod
     const { register, handleSubmit } = useForm<PaymentFormSchema>({
         resolver: zodResolver(paymentFormSchema),
         mode: 'onChange'
@@ -29,10 +36,11 @@ export default function ShippingPaymentForm() {
         console.log("Payment Order");
         const result = await sendPaymentData(data);
         console.log('result', result);
-        
+
         alert(result.message);
     }
 
+    // Função simples de validação
     function validateSimple(value: string): boolean {
         return value.length >= 5; // Pelo menos 5 caracteres
     }
@@ -72,11 +80,12 @@ export default function ShippingPaymentForm() {
     };
 
 
+
     const ShippingForm: React.FC<{ onChangeView: () => void }> = ({ onChangeView }) => (
         <div>
             <div className="flex flex-row items-center text-center justify-center gap-2">
                 <span
-                    className="text-[#3182CE] text-[20px] font-medium cursor-pointer"
+                    className="text-b600 text-[20px] font-medium cursor-pointer"
                     onClick={onChangeView}
                 >
                     Shipping
@@ -166,7 +175,7 @@ export default function ShippingPaymentForm() {
         <>
             <div className="flex flex-row items-center text-center justify-center gap-2">
                 <span
-                    className="text-[#3182CE] text-[20px] font-medium"
+                    className="text-b600 text-[20px] font-medium"
                     onClick={onChangeView}
                 >
                     Shipping
@@ -174,7 +183,7 @@ export default function ShippingPaymentForm() {
                 <LineSvg />
                 <CheckSvg />
                 <LineSvg />
-                <span className="text-[#3182CE] text-[20px] font-medium">Payment</span>
+                <span className="text-b600 text-[20px] font-medium">Payment</span>
             </div>
 
             <br />
@@ -266,11 +275,6 @@ export default function ShippingPaymentForm() {
         </>
     );
 
-    const [isShippingForm, setIsShippingForm] = useState(true);
-
-    const toggleView = () => {
-        setIsShippingForm(!isShippingForm);
-    };
 
     return (
         <div>

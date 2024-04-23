@@ -10,8 +10,8 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = ({ label, onClick, variant = 'primary', typeButton}) => {
   const buttonClass = classNames('p-2 text-base', {
-    'bg-[#3182CE] text-[#F7FBFC] shadow-custom': variant === 'primary',
-    'bg-[#f8fafc] text-[#4A5568]': variant === 'secondary',
+    'bg-b600 text-[#F7FBFC] shadow-custom': variant === 'primary',
+    'bg-light text-c700': variant === 'secondary',
   });
 
   const customStyles = classNames(

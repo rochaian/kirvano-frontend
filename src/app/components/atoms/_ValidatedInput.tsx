@@ -29,7 +29,7 @@ const ValidatedInput = forwardRef<HTMLInputElement, ValidatedInputProps>(
           placeholder={placeholder}
           value={value?.toString() ?? ''}
           onChange={handleChange}
-          className={`w-full bg-[#E2E8F0] text-[#2D3748] rounded-lg px-4 py-4 
+          className={`w-full bg-c300 text-b800 rounded-lg px-4 py-4 
                       focus:outline-none focus:ring-2 focus:ring-blue-500`}
           // ref={ref} // Apenas um ref deve ser definido
           {...rest} // Outras propriedades do React Hook Form

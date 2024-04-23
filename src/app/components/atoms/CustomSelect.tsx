@@ -18,7 +18,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ options, defaultOption }) =
         <div className='relative'>
 
             <select
-                className="w-full bg-[#E2E8F0] text-[#2D3748] rounded-lg pl-4 pr-16 py-4 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
+                className="w-full bg-c300 text-b800 rounded-lg pl-4 pr-16 py-4 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
                 defaultValue={defaultOption}
             >
                 {options.map((option, index) => (

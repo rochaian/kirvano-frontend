@@ -14,19 +14,19 @@ const Label: React.FC<LabelProps> = ({ text, variant }) => {
     'font-inter text-left pb-4': true, // Fonte Inter, alinhamento à esquerda para todos
     'text-[20px] font-medium leading-[24.2px] text-black': variant === 'primary', // Título principal
     
-    'text-[18px] font-medium leading-[21.78px] text-[#4A5568]': variant === 'secondary', // Título secundário
+    'text-[18px] font-medium leading-[21.78px] text-c700': variant === 'secondary', // Título secundário
     
-    'text-[16px] font-medium leading-[19.36px] text-[#2D3748]': variant === 'tertiary', // Título terciário
-    'text-[16px] font-medium leading-[19.36px] text-[#718096]': variant === 'quaternary', // Título quaternário
+    'text-[16px] font-medium leading-[19.36px] text-b800': variant === 'tertiary', // Título terciário
+    'text-[16px] font-medium leading-[19.36px] text-c600': variant === 'quaternary', // Título quaternário
 
     'text-[20px] font-bold leading-[24.2px] text-black': variant === 'bold', // Negrito
 
 
-    'text-[20px] font-medium leading-[24.2px] text-[#2D3748]': variant === 'price', // Preço
+    'text-[20px] font-medium leading-[24.2px] text-b800': variant === 'price', // Preço
 
-    'text-[20px] font-medium leading-[24.2px] text-[#38B2AC]': variant === 'green', // Verde
+    'text-[20px] font-medium leading-[24.2px] text-v500': variant === 'green', // Verde
 
-    'text-[20px] font-medium leading-[24.2px]] text-[#3182CE]': variant === 'blue' // Azul
+    'text-[20px] font-medium leading-[24.2px]] text-b600': variant === 'blue' // Azul
   });
 
   return <span className={labelClass}>{text}</span>;

@@ -42,25 +42,3 @@ export const sendPaymentData = async (data: PaymentFormSchema): Promise<ApiRespo
         return { success: false, message: error.message || 'Erro desconhecido ao enviar o formulário' };
     }
 };
-
-
-// export const sendPaymentData = async (data: PaymentData) => {
-//   try {
-//     const response = await fetch(`${API_BASE_URL}/payments?access_token=ABCDE12345`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(data),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`Erro ao enviar dados: ${response.statusText}`);
-//     }
-
-//     return await response.json();
-//   } catch (error) {
-//     console.error('Erro ao enviar dados para API:', error);
-//     throw error;
-//   }
-// };

@@ -1,9 +1,5 @@
 
-
-import { Path, UseFormRegister } from "react-hook-form";
-import { ChangeEvent, useEffect, useState } from "react";
-import { PaymentFormSchema } from "@/app/types/PaymentFormSchema";
-
+import { ChangeEvent, useState } from "react";
 import CheckSvg from '@/app/icons/check.svg'; // Ícone para validação bem-sucedida
 
 type InputProps = {
@@ -13,7 +9,7 @@ type InputProps = {
 }
 
 const InputTextForm = ({ label, placeholder, onValidate }: InputProps) => {
-    
+
     const [isValid, setIsValidate] = useState(false)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +25,7 @@ const InputTextForm = ({ label, placeholder, onValidate }: InputProps) => {
                 name="label"
                 onChange={handleChange}
                 placeholder={placeholder}
-                className={`w-full bg-[#E2E8F0] text-[#2D3748] rounded-lg px-4 py-4 
+                className={`w-full bg-c300 text-b800 rounded-lg px-4 py-4 
                           focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
             {isValid && (
