@@ -4,6 +4,7 @@ import Button from "@/components/atoms/Button";
 import LineSvg from '../../../public/line.svg';
 import CheckSvg from '../../../public/check.svg';
 import ExpirationSvg from '../../../public/expiration-line.svg';
+import InformationIconSvg from '../../../public/information.svg';
 import CustomSelect from "@/components/atoms/CustomSelect";
 
 import { useForm } from 'react-hook-form';
@@ -23,38 +24,56 @@ export default function ShippingPaymentForm() {
         mode: 'onChange'
     });
 
-    // // Define uma interface para a resposta da API
-    // interface ApiResponse {
-    //     success: boolean;
-    //     message: string;
-    // }
+    // Define uma interface para a resposta da API
+    interface ApiResponse {
+        success: boolean;
+        message: string;
+    }
 
-    // const sendFormData = async (data: Record<string, any>): Promise<ApiResponse> => {
-    //     try {
-    //         const response = await fetch('https://localhost:3000/api/payment', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(data),
-    //         });
+    const sendFormData = async (data: PaymentFormSchema): Promise<ApiResponse> => {
+        try {
+            const response = await fetch('http://localhost:3000/api/payments?access_token=ABCDE12345', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
 
-    //         if (!response.ok) {
-    //             throw new Error('Erro ao enviar o formulário');
-    //         }
+            // Verifica se a resposta está ok ou não
+            if (!response.ok) {
+                // Verifica se o status é 400 para fornecer uma mensagem mais clara
+                if (response.status === 400) {
+                    const errorData = await response.json(); // Tenta obter mais detalhes do erro
 
-    //         const json = await response.json();
+                    alert(errorData.message);
 
-    //         return { success: true, message: json.message || 'Formulário enviado com sucesso!' };
-    //     } catch (error: any) {
-    //         return { success: false, message: error.message };
-    //     }
-    // };
+                    return {
+                        success: false,
+                        message: errorData.message || 'Erro no formulário. Verifique os campos.',
+                    };
+                }
+                // Lança um erro genérico para outros códigos de status
+                throw new Error('Erro ao enviar o formulário');
+            }
+
+            // Se a resposta for bem-sucedida
+            const json = await response.json();
+            alert(json.message);
+
+            return { success: true, message: json.message || 'Formulário enviado com sucesso!' };
+        } catch (error: any) {
+            // Se houve uma exceção, retorna uma mensagem de erro
+            return { success: false, message: error.message || 'Erro desconhecido ao enviar o formulário' };
+        }
+    };
+
 
     // Função para proceder o pagamento
-    function handleSubmitForm(data: PaymentFormSchema) {
+    async function handleSubmitForm(data: PaymentFormSchema) {
         console.log("Payment Order");
-        console.log(data)
+        console.log(data);
+        sendFormData(data);
     }
 
     function validateSimple(value: string): boolean {
@@ -73,13 +92,13 @@ export default function ShippingPaymentForm() {
     }
 
     // Função para validar mês de expiração
-    function validateExpirationMM(expMM: string): boolean {
+    function validateExpirationDateMM(expMM: string): boolean {
         const expMMRegex = /^(0[1-9]|1[0-2])$/; // Entre 01 e 12
         return expMMRegex.test(expMM);
     }
 
     // Função para validar ano de expiração
-    function validateExpirationYY(expYY: string): boolean {
+    function validateExpirationDateYY(expYY: string): boolean {
         const expYYRegex = /^\d{2}$/; // Dois dígitos
         return expYYRegex.test(expYY);
     }
@@ -246,10 +265,10 @@ export default function ShippingPaymentForm() {
                         <div className="flex flex-row items-center text-center justify-center gap-2">
                             <ValidatedInputText
                                 required={true}
-                                label="expirationMM"
+                                label="expirationDateMM"
                                 register={register}
                                 placeholder="MM"
-                                onValidate={validateExpirationMM}
+                                onValidate={validateExpirationDateMM}
                             />
 
                             <div className="flex">
@@ -257,16 +276,20 @@ export default function ShippingPaymentForm() {
                             </div>
                             <ValidatedInputText
                                 required={true}
-                                label="expirationYY"
+                                label="expirationDateYY"
                                 register={register}
                                 placeholder="YY"
-                                onValidate={validateExpirationYY}
+                                onValidate={validateExpirationDateYY}
                             />
                         </div>
                     </div>
 
                     <div className="col-span-4">
-                        <Label text="CVC" variant="quaternary" />
+                        <div className="flex row-span-full mb-[-12px]">
+                            <Label text="CVC" variant="quaternary" />
+                            <InformationIconSvg />
+                        </div>
+
                         <ValidatedInputText
                             required={true}
                             label="cvc"

@@ -5,10 +5,10 @@ export const paymentFormSchema = z.object({
     cardNumber: z
       .string()
       .regex(/^\d{15,16}$/, 'O número do cartão deve ter entre 15 e 16 dígitos'),
-    expirationMM: z
+    expirationDateMM: z
       .string()
       .regex(/^(0[1-9]|1[0-2])$/, 'Mês de expiração deve ser entre 01 e 12'),
-    expirationYY: z
+    expirationDateYY: z
       .string()
       .regex(/^\d{2}$/, 'Ano de expiração deve ter 2 dígitos'),
     cvc: z

@@ -36,7 +36,7 @@ const ValidatedInputText = ({ label, register, required, placeholder, onValidate
                           focus:outline-none focus:ring-2 focus:ring-blue-500`}
       />
       {isValid && (
-        <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+        <div className="absolute inset-y-0 right-0 flex items-center pr-2">
           <CheckSvg />
         </div>
       )}
