@@ -4,7 +4,7 @@ import { Path, UseFormRegister } from "react-hook-form";
 import { ChangeEvent, useEffect, useState } from "react";
 import { PaymentFormSchema } from "@/app/types/PaymentFormSchema";
 
-import CheckSvg from '../../../public/check.svg'; // Ícone para validação bem-sucedida
+import CheckSvg from '@/app/icons/check.svg'; // Ícone para validação bem-sucedida
 
 type InputProps = {
     label: string

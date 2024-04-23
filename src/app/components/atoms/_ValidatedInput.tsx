@@ -1,6 +1,6 @@
 import React, { ChangeEvent, forwardRef, Ref, useState } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
-import CheckSvg from '../../../public/check.svg'; // Ícone para validação bem-sucedida
+import CheckSvg from '@/app/icons/check.svg'; // Ícone para validação bem-sucedida
 
 
 

@@ -1,7 +1,7 @@
 'use client'
 
-import OrderSummary from "@/components/molecules/OrderSummary";
-import ShippingPaymentForm from "@/components/molecules/ShippingPaymentForm";
+import OrderSummary from "@/app/components/molecules/OrderSummary";
+import ShippingPaymentForm from "@/app/components/molecules/ShippingPaymentForm";
 
 export default function Checkout() {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectIconSvg from '../../../public/select-icon.svg'
+import SelectIconSvg from '@/app/icons/select-icon.svg'
 
 // Definindo o tipo das opções do seletor
 interface Option {

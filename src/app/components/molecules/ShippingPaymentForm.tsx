@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Label from "@/components/atoms/Label";
-import Button from "@/components/atoms/Button";
-import LineSvg from '../../../public/line.svg';
-import CheckSvg from '../../../public/check.svg';
-import ExpirationSvg from '../../../public/expiration-line.svg';
-import InformationIconSvg from '../../../public/information.svg';
-import CustomSelect from "@/components/atoms/CustomSelect";
+import Label from "@/app/components/atoms/Label";
+import Button from "@/app/components/atoms/Button";
+import LineSvg from '@/app/icons/line.svg';
+import CheckSvg from '@/app/icons/check.svg';
+import ExpirationSvg from '@/app/icons/expiration-line.svg';
+import InformationIconSvg from '@/app/icons/information.svg';
+import CustomSelect from "@/app/components/atoms/CustomSelect";
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";

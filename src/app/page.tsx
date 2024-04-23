@@ -1,4 +1,4 @@
-import Checkout from "@/components/organisms/Checkout";
+import Checkout from "@/app/components/organisms/Checkout";
 
 export default function Home() {
 

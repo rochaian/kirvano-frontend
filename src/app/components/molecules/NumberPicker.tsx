@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react';
-import DecrementIcon from '../../../public/decrement.svg'; 
-import IncrementIcon from '../../../public/increment.svg'; 
+import DecrementIcon from '@/app/icons/decrement.svg'; 
+import IncrementIcon from '@/app/icons/increment.svg'; 
 
 interface NumberPickerProps {
   initialValue?: number; // Valor inicial do picker

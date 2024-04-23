@@ -1,5 +1,5 @@
-import Label from "@/components/atoms/Label";
-import NumberPicker from "@/components/molecules/NumberPicker";
+import Label from "@/app/components/atoms/Label";
+import NumberPicker from "@/app/components/molecules/NumberPicker";
 
 import Image from 'next/image'
 import GiftCard from "./GiftCard";
