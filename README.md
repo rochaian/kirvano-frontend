@@ -52,6 +52,14 @@ Com a aplicação em execução, use a interface para inserir informações de c
 
 Para testar o projeto de simulação de pagamento, acesse o link na Vercel: [kirvano-frontend](https://kirvano-frontend.vercel.app/). 
 
+## Cartões Que Passam no Teste de Luhn
+Para testes, você pode usar cartões de crédito fictícios que passam no algoritmo de Luhn. Aqui estão alguns exemplos:
+
+Visa: 4111 1111 1111 1111
+MasterCard: 5500 0000 0000 0004
+Amex: 3782 8224 6310 005
+Esses exemplos podem ser utilizados para simular pagamentos bem-sucedidos.
+
 ## Contribuição
 Contribuições para aprimorar o projeto são bem-vindas. Para contribuir, crie um fork, faça suas alterações e envie um pull request.
 
