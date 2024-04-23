@@ -5,28 +5,95 @@ import LineSvg from '../../../public/line.svg';
 import CheckSvg from '../../../public/check.svg';
 import ExpirationSvg from '../../../public/expiration-line.svg';
 import CustomSelect from "@/components/atoms/CustomSelect";
-import ValidatedInput from "@/components/atoms/ValidatedInput";
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import ValidatedInputText from "../atoms/ValidatedInputText";
+
+
+import { PaymentFormSchema, paymentFormSchema } from "@/app/types/PaymentFormSchema";
+import InputTextForm from "../atoms/InputTextForm";
+
+
 
 export default function ShippingPaymentForm() {
 
+    const { register, handleSubmit } = useForm<PaymentFormSchema>({
+        resolver: zodResolver(paymentFormSchema),
+        mode: 'onChange'
+    });
 
-    // Função para validar campo
-    const validateAddress = (address: string): boolean => {
+    // // Define uma interface para a resposta da API
+    // interface ApiResponse {
+    //     success: boolean;
+    //     message: string;
+    // }
 
-        const addressRegex = /^.{5,}$/; // Simples regex para verificar se o campo possui mais de 5 caracteres
-        return addressRegex.test(address);
-    };
+    // const sendFormData = async (data: Record<string, any>): Promise<ApiResponse> => {
+    //     try {
+    //         const response = await fetch('https://localhost:3000/api/payment', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(data),
+    //         });
+
+    //         if (!response.ok) {
+    //             throw new Error('Erro ao enviar o formulário');
+    //         }
+
+    //         const json = await response.json();
+
+    //         return { success: true, message: json.message || 'Formulário enviado com sucesso!' };
+    //     } catch (error: any) {
+    //         return { success: false, message: error.message };
+    //     }
+    // };
+
+    // Função para proceder o pagamento
+    function handleSubmitForm(data: PaymentFormSchema) {
+        console.log("Payment Order");
+        console.log(data)
+    }
+
+    function validateSimple(value: string): boolean {
+        return value.length >= 5; // Pelo menos 5 caracteres
+    }
+
+    // Função para validar nome no cartão
+    function validateNameOnCard(name: string): boolean {
+        return name.length >= 3; // Pelo menos 3 caracteres
+    }
+
+    // Função para validar número do cartão
+    function validateCardNumber(cardNumber: string): boolean {
+        const cardNumberRegex = /^\d{15,16}$/; // Entre 15 e 16 dígitos
+        return cardNumberRegex.test(cardNumber);
+    }
+
+    // Função para validar mês de expiração
+    function validateExpirationMM(expMM: string): boolean {
+        const expMMRegex = /^(0[1-9]|1[0-2])$/; // Entre 01 e 12
+        return expMMRegex.test(expMM);
+    }
+
+    // Função para validar ano de expiração
+    function validateExpirationYY(expYY: string): boolean {
+        const expYYRegex = /^\d{2}$/; // Dois dígitos
+        return expYYRegex.test(expYY);
+    }
+
+    // Função para validar CVC
+    function validateCVC(cvc: string): boolean {
+        const cvcRegex = /^\d{3,4}$/; // Entre 3 e 4 dígitos
+        return cvcRegex.test(cvc);
+    }
 
     // Função para cancelar o pedido
     const onCancelOrder = () => {
         console.log("Cancel order");
     };
-
-     // Função para proceder o pagamento
-     const onCompleteOrder = () => {
-        console.log("Payment Order");
-    };
-
 
 
     const ShippingForm: React.FC<{ onChangeView: () => void }> = ({ onChangeView }) => (
@@ -54,8 +121,7 @@ export default function ShippingPaymentForm() {
                 <CustomSelect
                     options={[
                         { label: '123, Electric avenue', value: '1' },
-                        { label: 'Option 2', value: '2' },
-                        { label: 'Option 3', value: '3' },
+                        { label: '44, Ayn Streets', value: '2' }
                     ]}
                     defaultOption="1"
                 />
@@ -63,16 +129,18 @@ export default function ShippingPaymentForm() {
 
             <br />
             <Label text="First line of address" variant="quaternary" />
-            <ValidatedInput
+            <InputTextForm
+                label="address"
                 placeholder="Enter your Address"
-                onValidate={(val) => val.length > 5}
-            />
+                onValidate={validateSimple}
 
+            />
             <br />
             <Label text="Street name" variant="quaternary" />
-            <ValidatedInput
+            <InputTextForm
+                label="streetName"
                 placeholder="Enter your Street name"
-                onValidate={validateAddress}
+                onValidate={validateSimple}
             />
 
             <br />
@@ -80,9 +148,10 @@ export default function ShippingPaymentForm() {
             <div className="grid grid-flow-row-dense grid-cols-7 gap-8">
                 <div className="col-span-3">
                     <Label text="Postcode" variant="quaternary" />
-                    <ValidatedInput
-                        placeholder="Enter your Street name"
-                        onValidate={validateAddress}
+                    <InputTextForm
+                        label="streetName"
+                        placeholder="00000-000"
+                        onValidate={validateSimple}
                     />
                 </div>
 
@@ -91,8 +160,8 @@ export default function ShippingPaymentForm() {
                     <CustomSelect
                         options={[
                             { label: 'Free delivery', value: '1' },
-                            { label: 'Option 2', value: '2' },
-                            { label: 'Option 3', value: '3' },
+                            { label: 'Express delivery', value: '2' },
+                            { label: 'Take out', value: '3' },
                         ]}
                         defaultOption="1"
                     />
@@ -105,8 +174,9 @@ export default function ShippingPaymentForm() {
             <br />
 
             <div className="flex justify-end">
-                <Button label="Cancel Order" variant="secondary" onClick={onCancelOrder}/>
+                <Button typeButton="button" label="Cancel Order" variant="secondary" onClick={onCancelOrder} />
                 <Button
+                    typeButton="button"
                     label="Payment"
                     variant="primary"
                     onClick={onChangeView}
@@ -117,7 +187,7 @@ export default function ShippingPaymentForm() {
 
 
     const PaymentForm: React.FC<{ onChangeView: () => void }> = ({ onChangeView }) => (
-        <div>
+        <>
             <div className="flex flex-row items-center text-center justify-center gap-2">
                 <span
                     className="text-[#3182CE] text-[20px] font-medium"
@@ -141,79 +211,80 @@ export default function ShippingPaymentForm() {
                 <CustomSelect
                     options={[
                         { label: 'Mastercard ending 234', value: '1' },
-                        { label: 'Opção 2', value: '2' },
-                        { label: 'Opção 3', value: '3' },
+                        { label: 'Mastercard ending 44', value: '2' },
+                        { label: 'Visa ending 444', value: '3' },
                     ]}
                     defaultOption="1"
                 />
             </div>
 
             <br />
-            <Label text="Name on card" variant="quaternary" />
-            <ValidatedInput
-                placeholder="Enter Name on Card"
-                onValidate={validateAddress}
-            />
+            <form onSubmit={handleSubmit(handleSubmitForm)}>
+                <Label text="Name on Card" variant="quaternary" />
+                <ValidatedInputText
+                    required={true}
+                    label="nameOnCard"
+                    register={register}
+                    placeholder="Enter Name on Card"
+                    onValidate={validateNameOnCard}
+                />
+                <br />
 
-            <br />
-            <Label text="Card number" variant="quaternary" />
-            <ValidatedInput
-                placeholder="Enter Card number"
-                onValidate={validateAddress}
-            />
+                <Label text="Card Number" variant="quaternary" />
+                <ValidatedInputText
+                    required={true}
+                    label="cardNumber"
+                    register={register}
+                    placeholder="0000-0000-0000-0000"
+                    onValidate={validateCardNumber}
+                />
+                <br />
 
-            <br />
+                <div className="grid grid-flow-row-dense grid-cols-7 gap-8">
+                    <div className="col-span-3">
+                        <Label text="Expiration" variant="quaternary" />
+                        <div className="flex flex-row items-center text-center justify-center gap-2">
+                            <ValidatedInputText
+                                required={true}
+                                label="expirationMM"
+                                register={register}
+                                placeholder="MM"
+                                onValidate={validateExpirationMM}
+                            />
 
-            <div className="grid grid-flow-row-dense grid-cols-7 gap-8">
-                <div className="col-span-3">
-                    <Label text="Expiration" variant="quaternary" />
-                    <div className="flex flex-row items-center text-center justify-center gap-2">
-                        <ValidatedInput
-                            placeholder="MM"
-                            onValidate={validateAddress}
-                        />
-                        <div className="flex">
-                            <ExpirationSvg />
+                            <div className="flex">
+                                <ExpirationSvg />
+                            </div>
+                            <ValidatedInputText
+                                required={true}
+                                label="expirationYY"
+                                register={register}
+                                placeholder="YY"
+                                onValidate={validateExpirationYY}
+                            />
                         </div>
-
-                        <ValidatedInput
-                            placeholder="YY"
-                            onValidate={validateAddress}
-                        />
                     </div>
 
+                    <div className="col-span-4">
+                        <Label text="CVC" variant="quaternary" />
+                        <ValidatedInputText
+                            required={true}
+                            label="cvc"
+                            register={register}
+                            placeholder="000"
+                            onValidate={validateCVC}
+                        />
+                    </div>
                 </div>
 
-                <div className="col-span-4">
-                    <Label text="CVC" variant="quaternary" />
-                    <ValidatedInput
-                        placeholder="123"
-                        onValidate={validateAddress}
-                    />
+                <br />
+                <div className="flex justify-end">
+                    <Button typeButton="button" label="Cancel Order" variant="secondary" onClick={onCancelOrder} />
+                    <Button typeButton="submit" label="Complete Order" variant="primary" />
                 </div>
-            </div>
-
-            <br />
-
-            <hr className="border-t-1 border-gray-300" />
-            <br />
-
-            <div className="flex justify-end">
-                <Button
-                    label="Cancel Order"
-                    variant="secondary"
-                    onClick={onCancelOrder}
-                />
-                <Button
-                    label="Complete order"
-                    variant="primary"
-                    onClick={onCompleteOrder}
-                />
-            </div>
-        </div>
+            </form>
+        </>
     );
-
-
 
     const [isShippingForm, setIsShippingForm] = useState(true);
 

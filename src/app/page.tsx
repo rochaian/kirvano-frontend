@@ -1,7 +1,7 @@
 'use client'
 
 import OrderSummary from "@/components/molecules/OrderSummary";
-import ShippingPaymentForm2 from "@/components/molecules/ShippingPaymentForm2";
+import ShippingPaymentForm from "@/components/molecules/ShippingPaymentForm";
 
 export default function Home() {
 
@@ -18,7 +18,7 @@ export default function Home() {
 
           <div className="col-span-4 bg-[#f6fafd] px-20 py-10 rounded-lg">
 
-            <ShippingPaymentForm2 />
+            <ShippingPaymentForm />
 
 
 
