@@ -259,7 +259,7 @@ export default function ShippingPaymentForm() {
                 />
                 <br />
 
-                <div className="grid grid-flow-row-dense grid-cols-7 gap-8">
+                <div className="grid grid-flow-row-dense grid-cols-7 gap-6">
                     <div className="col-span-3">
                         <Label text="Expiration" variant="quaternary" />
                         <div className="flex flex-row items-center text-center justify-center gap-2">

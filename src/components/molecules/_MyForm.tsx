@@ -1,7 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import InputTextForm from '../atoms/InputTextForm'; // Componente InputText
 
 // Esquema Zod para validação do formulário
 const formSchema = z.object({
