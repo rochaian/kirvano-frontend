@@ -32,7 +32,7 @@ export default function ShippingPaymentForm() {
 
     const sendFormData = async (data: PaymentFormSchema): Promise<ApiResponse> => {
         try {
-            const response = await fetch('http://localhost:3000/api/payments?access_token=ABCDE12345', {
+            const response = await fetch('https://kirvano-backend.onrender.com/api/payments?access_token=ABCDE12345', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
