@@ -3,6 +3,8 @@
 
 Este repositório contém um projeto que simula um processo de pagamento ao enviar informações de cartão de crédito para uma API de validação. A aplicação valida se os dados do cartão inseridos pelo usuário estão corretos e se passam por uma série de verificações, incluindo a validação pelo algoritmo de Luhn.
 
+[kirvano-frontend](https://kirvano-frontend.vercel.app/)
+
 ## Recursos do Projeto
 - Simulação de processo de pagamento com validação em tempo real
 - Verificação de informações do cartão, como número, data de validade e código de segurança
@@ -48,7 +50,7 @@ yarn dev
 ### Passo 4: Simule um Pagamento
 Com a aplicação em execução, use a interface para inserir informações de cartão de crédito e simular um pagamento. A API responderá com uma validação dos dados inseridos.
 
-Para testar o projeto de simulação de pagamento, acesse o link na Vercel: [https://kirvano-frontend.vercel.app/](kirvano-frontend). 
+Para testar o projeto de simulação de pagamento, acesse o link na Vercel: [kirvano-frontend](https://kirvano-frontend.vercel.app/). 
 
 ## Contribuição
 Contribuições para aprimorar o projeto são bem-vindas. Para contribuir, crie um fork, faça suas alterações e envie um pull request.
