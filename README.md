@@ -17,7 +17,6 @@ Amex: 3782 8224 6310 005
 Esses exemplos podem ser utilizados para simular pagamentos bem-sucedidos.
 ```
 
-
 ## Recursos do Projeto
 - Simulação de processo de pagamento com validação em tempo real
 - Verificação de informações do cartão, como número, data de validade e código de segurança

@@ -15,9 +15,20 @@ import InputTextForm from "../atoms/InputTextForm";
 
 import { sendPaymentData } from "@/app/services/apiService";
 
-
-
 export default function ShippingPaymentForm() {
+
+    const [optionsSelectCard, setOptionsSelectCard] = useState([{ label: 'Select saved Card', value: 'none' }]);
+
+    // Função para salvar dados no sessionStorage
+    const saveToSessionStorage = (key: string, value: any) => {
+        sessionStorage.setItem(key, JSON.stringify(value));
+    };
+
+    // Função para carregar dados do sessionStorage
+    const loadFromSessionStorage = (key: string) => {
+        const item = sessionStorage.getItem(key);
+        return item ? JSON.parse(item) : null;
+    };
 
     //Utilizado para alterar as telas do formulário
     const [isShippingForm, setIsShippingForm] = useState(true);
@@ -26,7 +37,7 @@ export default function ShippingPaymentForm() {
     };
 
     //Utilizado para registrar e integrar o react-hook-form com o zod
-    const { register, handleSubmit } = useForm<PaymentFormSchema>({
+    const { register, handleSubmit, setValue, reset} = useForm<PaymentFormSchema>({
         resolver: zodResolver(paymentFormSchema),
         mode: 'onChange'
     });
@@ -37,7 +48,71 @@ export default function ShippingPaymentForm() {
         const result = await sendPaymentData(data);
         console.log('result', result);
 
+        if (result.success) {
+            const keyCard = getCardType(data.cardNumber) + ' ending ' + getLast4Digits(data.cardNumber);
+            saveToSessionStorage(keyCard, data);
+            addOptionSelectCard(keyCard);
+        }
         alert(result.message);
+    }
+
+    // Define um objeto para mapear os padrões de prefixos para bandeiras de cartão de crédito
+    const cardPatterns: { [key: string]: string } = {
+        '^4[0-9]{12}(?:[0-9]{3})?$': 'Visa',
+        '^5[1-5][0-9]{14}$': 'Mastercard',
+        '^3[47][0-9]{13}$': 'American Express',
+        '^6(?:011|5[0-9]{2})[0-9]{12}$': 'Discover',
+        '^(?:5[0678]|6[37])[0-9]{12,15}$': 'Maestro',
+    };
+
+    // Função que retorna a bandeira do cartão com base no número do cartão
+    const getCardType = (cardNumber: string): string => {
+        for (const pattern in cardPatterns) {
+            const regex = new RegExp(pattern);
+            if (regex.test(cardNumber)) {
+                return cardPatterns[pattern]; // Retorna a bandeira do cartão
+            }
+        }
+        return 'Unknown'; // Retorna 'Unknown' se não corresponder a nenhuma bandeira conhecida
+    };
+
+    // Função para obter os últimos 4 dígitos do número do cartão
+    const getLast4Digits = (cardNumber: string): string => {
+        // Verifica se o número do cartão tem pelo menos 4 dígitos
+        if (cardNumber.length >= 4) {
+            return cardNumber.slice(-4); // Retorna os últimos 4 dígitos
+        } else {
+            throw new Error('O número do cartão é muito curto'); // Lança um erro se o número for menor que 4 dígitos
+        }
+    };
+
+    const addOptionSelectCard = (keyCard: string) => {
+        // Verifica se o cartão já existe no array
+        const cardExists = optionsSelectCard.some((option) => option.value === keyCard);
+
+        if (!cardExists) {
+            // Se não existir, adicione ao array
+            setOptionsSelectCard([...optionsSelectCard, { label: keyCard, value: keyCard }]);
+        }
+    };
+
+    function handleChangeCardSelect(value: string) {
+        console.log('Select card', value);
+        //Verificar se o valor é none então reseta o formulário, senão insere nos campos os dados do cartão salvo
+        if(value === 'none'){
+            reset()
+        }else{
+            setFormCard(loadFromSessionStorage(value));
+        }
+    }
+
+    function setFormCard(data: PaymentFormSchema){
+        console.log(data);
+        setValue('nameOnCard', data.nameOnCard);
+        setValue('cardNumber', data.cardNumber);
+        setValue('expirationDateMM', data.expirationDateMM);
+        setValue('expirationDateYY', data.expirationDateYY);
+        setValue('cvc', data.cvc);
     }
 
     // Função simples de validação
@@ -194,12 +269,15 @@ export default function ShippingPaymentForm() {
             <div className="flex flex-row justify-between items-center">
                 <Label text="Use saved card" variant="tertiary" />
                 <CustomSelect
-                    options={[
-                        { label: 'Mastercard ending 234', value: '1' },
-                        { label: 'Mastercard ending 44', value: '2' },
-                        { label: 'Visa ending 444', value: '3' },
-                    ]}
+                    onChange={handleChangeCardSelect}
+                    options={optionsSelectCard}
+                    // options={[
+                    //     { label: 'Mastercard ending 234', value: 'Mastercard ending 234' },
+                    //     { label: 'Mastercard ending 44', value: 'Mastercard ending 44' },
+                    //     { label: 'Visa ending 444', value: 'Visa ending 444' },
+                    // ]}
                     defaultOption="1"
+
                 />
             </div>
 
