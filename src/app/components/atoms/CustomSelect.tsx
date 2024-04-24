@@ -33,7 +33,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ options, defaultOption, onC
 
             <select
                 className="w-full bg-c300 text-b800 rounded-lg pl-4 pr-16 py-4 focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
-                defaultValue={defaultOption}
+                // defaultValue={defaultOption}
                 value={selectedValue}
                 onChange={handleChange}
             >
